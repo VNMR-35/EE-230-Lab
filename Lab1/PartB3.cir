@@ -1,0 +1,17 @@
+B3. RC Lowpass Filter Vinamra Baghel 190010070
+* <element-name> <nodes> <value/model>
+r 1 2 10k
+c 2 0 0.1u
+vin 1 0 dc 0 ac 1
+*analysis command
+.ac dec 10 1 1Meg
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set xbrushwidth = 2
+plot vdb(2) vdb(1)
+.endc
+.end

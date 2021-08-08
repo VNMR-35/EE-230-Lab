@@ -1,0 +1,30 @@
+Vinamra Baghel 190010070 Unregulated supply with Bridge Rectifier
+
+.MODEL 1N4007 D IS=6.2229E-9 N=1.9224 RS=0.33636 IKF=42.843E-3 CJO=764.38E-15 + M=0.1001 VJ=0.99900 BV=1000 IBV=1 TT=2.8854E-9
+
+*Netlist
+d1 in1 dum1 1N4007
+d2 gnd in1 1N4007
+d3 in2 dum3 1N4007
+d4 gnd in2 1N4007
+r out gnd 1k
+*c out gnd 100u
+vd1 dum1 out dc 0
+vd3 dum3 out dc 0
+vin in1 in2 sin(0 21.2132 50 0 0)
+
+*Analysis
+.tran 1u 50m
+
+*Control
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set xbrushwidth = 2
+plot v(out)
+plot i(vd1) i(vd3)
+.endc
+.end

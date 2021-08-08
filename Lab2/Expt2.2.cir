@@ -1,0 +1,28 @@
+Vinamra Baghel 190010070 DC Power Supply with Zener Diode Regulator
+
+.SUBCKT ZENER_12 1 2
+D1 1 2 DF
+DZ 3 1 DR
+VZ 2 3 10.8
+.MODEL DF D (IS=27.5p RS=0.620 N=1.10 CJO=78.3p VJ=1.00 M=0.330 TT=50.1n)
+.MODEL DR D (IS=5.49f RS=50 N=1.77)
+.ENDS
+
+*Netlist
+rs in 1 470
+X gnd 2 ZENER_12
+rl out 3 500k
+vs 1 out dc 0
+vz out 2 dc 0
+vl 3 gnd dc 0
+vin in gnd dc 20
+
+*Analysis
+.op
+
+*Control
+.control
+run
+print v(out) i(vs) i(vz) i(vl)
+.endc
+.end

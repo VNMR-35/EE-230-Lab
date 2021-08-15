@@ -1,0 +1,33 @@
+Vinamra Baghel 190010070 Common-Emitter Amplifier: Midband Voltage Gain
+
+.model bc547a NPN IS=10f BF=200 ISE=10.3f IKF=50m NE=1.3 BR=9.5 VAF=80 IKR=12m ISC=47p NC=2 VAR=10 RB=280 RE=1 RC=40 tr=0.3u tf=0.5n cje=12p vje=0.48 mje=0.5 cjc=6p vjc=0.7 mjc=0.33 kf=2f
+
+*Netlist
+r1 cc b 10k
+r2 b gnd 2.2k
+rc cc c 1.2k
+re e gnd 1k
+rs in in2 0
+rl out gnd 100k
+ce e gnd 100u
+c1 in2 b 10u
+c2 c out 10u
+Q c b e bc547a
+Vcc cc gnd 12
+Vin in gnd dc 0 ac 10m
+
+*Analysis
+.ac dec 10 10 10Meg
+
+*Control
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set xbrushwidth = 2
+print v(out)*100
+plot vdb(out)
+.endc
+.end

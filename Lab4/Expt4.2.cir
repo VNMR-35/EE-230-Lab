@@ -1,0 +1,25 @@
+Vinamra Baghel 190010070 BJT Current Mirror based Current Source
+
+.MODEL CA3046 NPN (IS=10.000E-15 BF=100 VAF=80 IKF=46.747E-3 ISE=114.23E-15 NE=1.4830 BR=.1001 VAR=100 IKR=10.010E-3 ISC=10.000E-15 RC=10 CJE=1.0260E-12 MJE=.33333 CJC=991.79E-15 MJC=.33333 TF=277.09E-12 XTF=309.38 VTF=16.364 ITF=1.7597 TR=10.000E-9)
+
+*Netlist
+r cc b 10k
+Q1 b b gnd CA3046
+Q2 out b gnd CA3046
+Vo out gnd 1
+Vcc cc gnd 12
+
+*Analysis
+.dc Vo 1 5 0.5
+
+*Control
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set xbrushwidth = 2
+plot -i(Vo)
+.endc
+.end

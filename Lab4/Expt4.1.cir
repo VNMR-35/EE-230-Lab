@@ -1,0 +1,33 @@
+Vinamra Baghel 190010070 BJT Current Source
+
+.model bc557a PNP IS=10f BF=100 ISE=10.3f IKF=50m NE=1.3 BR=9.5 VAF=80 IKR=12m ISC=47p NC=2 VAR=10 RB=280 RE=1 RC=40 tr=0.3u tf=0.5n cje=12p vje=0.48 mje=0.5 cjc=6p vjc=0.7 mjc=0.33 kf=2f
+.SUBCKT DI_1N4734A 1 2
+D1 1 2 DF
+DZ 3 1 DR
+VZ 2 3 4.48
+.MODEL DF D ( IS=73.6p RS=0.620 N=1.10 CJO=165p VJ=0.750 M=0.330 TT=50.1n )
+.MODEL DR D ( IS=14.7f RS=0.256 N=1.49 )
+.ENDS
+
+*Netlist
+re cc e 4.7k
+rb b gnd 2.2k
+rl out gnd 1k
+X b cc DI_1N4734A
+Q c b e bc557a
+Vc c out 0
+Vcc cc gnd 12
+
+*Analysis
+.dc RL 1k 10k 1k
+*Control
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set xbrushwidth = 2
+plot i(Vc) vs V(out)
+.endc
+.end

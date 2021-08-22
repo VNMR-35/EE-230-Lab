@@ -1,0 +1,39 @@
+Vinamra Baghel 190010070 Differential Pair
+
+.model bc547a NPN IS=10f BF=200 ISE=10.3f IKF=50m NE=1.3 BR=9.5 VAF=80 IKR=12m ISC=47p NC=2 VAR=10 RB=280 RE=1 RC=40 tr=0.3u tf=0.5n cje=12p vje=0.48 mje=0.5 cjc=6p vjc=0.7 mjc=0.33 kf=2f
+
+*Netlist
+re ee e 10k
+rb1 in1 b1 1k
+rb2 in2 b2 1k
+rc1 c1 cd1 6.8k
+rc2 c2 cd2 6.8k
+Q1 c1 b1 e bc547a
+Q2 c2 b2 e bc547a
+Vcd1 cd1 cc 0
+Vcd2 cd2 cc 0
+Vin1 in1 gnd sin(0 10m 1k 0 0)
+Vin2 in2 gnd 0
+Vee gnd ee 12
+Vcc cc gnd 12
+
+*Analysis
+.tran 0.01m 2m
+*.dc Vin1 -1 1 0.01
+*Control
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set color4 = green
+set xbrushwidth = 1.5
+*print v(e) v(c1) v(c2) (-i(Vee)) (-i(Vcd1)) (-i(Vcd2))
+plot v(in1)*100 v(c1) v(c2)
+*plot v(c1) v(c2) vs v(in1)
+meas tran a pp v(c1)
+meas tran b pp v(in1)
+print a/b
+.endc
+.end

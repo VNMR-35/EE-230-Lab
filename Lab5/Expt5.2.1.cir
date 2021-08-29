@@ -1,0 +1,18 @@
+Vinamra Baghel 190010070 NMOS Common-Source Amplifier (Bias Circuit)
+
+.model NXYAA5U nmos Level=1 Vto=0.7 KP=100u w=10u L=1u Gamma=0 Phi=0.65 Lambda=0.0
+
+rd d d1 2.2k
+rs s 0 1k
+r1 dd g 8.2k
+r2 g 0 3.3k
+m d g s 0 NXYAA5U
+vdum dd d1 0
+vdd dd 0 12
+
+.op
+.control
+run
+print i(vdum) v(g) v(d) v(s)
+.endc
+.end

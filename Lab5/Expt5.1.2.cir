@@ -1,0 +1,21 @@
+Vinamra Baghel 190010070 NMOS Output Characteristics
+
+.model NXYAA5U nmos Level=1 Vto=0.7 KP=1m w=10u L=1u Gamma=0 Phi=0.65 Lambda=0.0
+
+rd d d2 2.2k
+m d g 0 0 NXYAA5U
+vg g 0 2
+v2 d2 0 12
+
+.control
+dc v2 0 250 0.1 vg 2 5 1
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set color4 = green
+set xbrushwidth = 1.5
+plot -i(v2)
+.endc
+.end

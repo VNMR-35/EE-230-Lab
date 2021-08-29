@@ -2,7 +2,7 @@ Vinamra Baghel 190010070 NMOS Common-Source Amplifier
 
 .model NXYAA5U nmos Level=1 Vto=0.7 KP=100u w=10u L=1u Gamma=0 Phi=0.65 Lambda=0.01
 
-rd d d1 2.2k
+rd d d1 3.3k
 rs s 0 1k
 r1 dd g 8.2k
 r2 g 0 3.3k
@@ -11,11 +11,11 @@ c1 in g 10u
 m d g s 0 NXYAA5U
 vdum dd d1 0
 vdd dd 0 12
-vin in 0 sin(0 50m 1k 0 0)
-*vin in 0 dc 0 ac 50m
+*vin in 0 sin(0 50m 1k 0 0)
+vin in 0 dc 0 ac 50m
 
-.tran 0.01m 10m
-*.ac dec 10 10 1Meg
+*.tran 0.1u 10m
+.ac dec 10 10 10Meg
 .control
 run
 set color0 = white
@@ -24,8 +24,11 @@ set color2 = red
 set color3 = blue
 set color4 = green
 set xbrushwidth = 1.5
-*print v(d)*20
-plot v(in)*10 v(d)
-*plot vdb(d)
+print v(d)*20
+*plot v(in)*10 v(d)
+*meas tran pp_out pp v(d)
+*meas tran pp_in pp v(in)
+*let gain = -1*pp_out/pp_in
+*print gain
 .endc
 .end

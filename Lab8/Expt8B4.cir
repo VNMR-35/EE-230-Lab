@@ -1,0 +1,29 @@
+Vinamra Baghel 190010070 Sallen-Key (2-pole) Active Low-pass Filter
+
+.include ua741.txt
+
+*Netlist
+r1 out neg 1.8k
+r2 neg gnd 3.3k
+ra in 1 4.7k
+rb 1 pos 4.7k
+ca 1 out 0.1u
+cb pos gnd 0.1u
+X1 pos neg pp np out ua741
+Vccp pp gnd 12
+Vccn np gnd -12
+Vin in gnd dc 0 ac 1
+
+*Analysis
+.ac dec 100 1 10k
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set color4 = green
+set xbrushwidth = 2.5
+plot vdb(out)
+.endc
+.end

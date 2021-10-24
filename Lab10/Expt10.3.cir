@@ -1,0 +1,30 @@
+Vinamra Baghel 190010070 Astable multivibrator
+
+.include zener_B.txt
+.include ua741.txt
+
+*Netlist
+r neg out 4.7k
+r1 out ref 10k
+r2 ref gnd 10k
+r3 opout out 1k
+c gnd neg 0.001u
+X2 out 1 DI_1N4734A
+X3 gnd 1 DI_1N4734A
+X1 ref neg pp np opout ua741
+Vccp pp gnd 12
+Vccn np gnd -12
+
+*Analysis
+.tran 0.5u 0.3m
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set color4 = green
+set xbrushwidth = 2
+plot v(neg) v(out)
+.endc
+.end

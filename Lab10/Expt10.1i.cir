@@ -1,0 +1,32 @@
+Vinamra Baghel 190010070 Improved Wein Bridge Oscillator
+
+.include IN914.txt
+.include ua741.txt
+
+*Netlist
+r1 gnd neg 4.7k
+r2a neg 2 6.8k
+r2b 2 out 3.3k
+rs out 1 4.7k
+cs 1 pos 0.1u
+rp pos gnd 4.7k
+cp pos gnd 0.1u
+D1 2 out 1N914
+D2 out 2 1N914
+X1 pos neg pp np out ua741
+Vccp pp gnd 12
+Vccn np gnd -12
+
+*Analysis
+.tran 3u 250m 150m
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set color4 = green
+set xbrushwidth = 2
+plot v(out)
+.endc
+.end

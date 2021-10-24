@@ -1,0 +1,33 @@
+Vinamra Baghel 190010070 Phase-shift oscillator
+
+.include IN914.txt
+.include ua741.txt
+
+*Netlist
+rfa neg 1 47k
+rfb 1 out 82k
+r1 2 neg 4.7k
+c1 2 3 0.1u
+r2 3 gnd 4.7k
+c2 3 4 0.1u
+r3 4 gnd 4.7k
+c3 4 out 0.1u
+*D1 1 out 1N914
+*D2 out 1 1N914
+X1 gnd neg pp np out ua741
+Vccp pp gnd 12
+Vccn np gnd -12
+
+*Analysis
+.tran 100u 400m 200m
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set color4 = green
+set xbrushwidth = 2
+plot v(out)
+.endc
+.end
